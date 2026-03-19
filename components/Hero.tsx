@@ -1,210 +1,133 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useRef } from "react";
 import { imgSrc } from "../lib/imgSrc";
 
-const WA = "https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project+with+you.";
-
-const roles = [
-  "Automation Engineering",
-  "N8N & Zapier",
-  "AI Agent Builder",
-  "Marketing Systems",
-  "Web App Development",
-];
+const WA = "https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project.";
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const els = ref.current?.querySelectorAll(".reveal");
+    if (!els) return;
+    const timer = setTimeout(() => {
+      els.forEach((el, i) => setTimeout(() => el.classList.add("visible"), i * 120));
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section
+      ref={ref}
       style={{
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        padding: "8rem 2rem 4rem",
-        position: "relative",
-        zIndex: 1,
-        textAlign: "center",
+        padding: "7rem 2rem 4rem",
       }}
     >
-      <div style={{ maxWidth: "760px", width: "100%", animation: "fadeInUp 0.8s ease-out" }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", width: "100%" }}>
+        <div className="hero-layout" style={{ display: "grid", gridTemplateColumns: "1fr 420px", gap: "5rem", alignItems: "center" }}>
 
-        {/* Available badge */}
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            padding: "0.4rem 1rem",
-            background: "rgba(192, 57, 43, 0.1)",
-            border: "1px solid rgba(192, 57, 43, 0.3)",
-            borderRadius: "50px",
-            fontSize: "0.75rem",
-            color: "var(--red-light)",
-            fontWeight: 600,
-            letterSpacing: "1px",
-            marginBottom: "2rem",
-            textTransform: "uppercase" as const,
-          }}
-        >
-          <span
-            style={{
-              width: "6px",
-              height: "6px",
-              borderRadius: "50%",
-              background: "var(--red-light)",
-              animation: "pulse 2s ease-in-out infinite",
-              flexShrink: 0,
-            }}
-          />
-          Available for Projects
-        </div>
+          {/* ── Text ── */}
+          <div>
+            <div className="reveal" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", marginBottom: "1.5rem" }}>
+              <span className="status-dot" />
+              <span style={{ fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#E74C3C" }}>
+                Available for Projects
+              </span>
+            </div>
 
-        {/* Headshot */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "2rem",
-          }}
-        >
-          <div style={{ position: "relative", display: "inline-block" }}>
-            <div
+            <h1
+              className="reveal reveal-delay-1"
               style={{
-                position: "absolute",
-                inset: "-14px",
-                borderRadius: "50%",
-                border: "2px solid rgba(192, 57, 43, 0.25)",
-                animation: "float 8s ease-in-out infinite",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                inset: "-28px",
-                borderRadius: "50%",
-                border: "1px solid rgba(0, 212, 255, 0.12)",
-                animation: "float 10s ease-in-out infinite reverse",
-              }}
-            />
-            <Image
-              src={imgSrc("headshot.png")}
-              alt="John Lemuel Culinares"
-              width={220}
-              height={220}
-              style={{
-                borderRadius: "50%",
-                border: "3px solid rgba(192, 57, 43, 0.5)",
-                boxShadow:
-                  "0 0 50px rgba(192, 57, 43, 0.2), 0 0 80px rgba(0, 212, 255, 0.08)",
-                animation: "float 6s ease-in-out infinite",
-                objectFit: "cover",
-                display: "block",
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Headline */}
-        <h1
-          style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: "clamp(2.5rem, 6vw, 4rem)",
-            fontWeight: 700,
-            lineHeight: 1.1,
-            marginBottom: "1rem",
-          }}
-        >
-          Hello, I&apos;m{" "}
-          <span className="gradient-text">John!</span>
-        </h1>
-
-        <p
-          style={{
-            fontSize: "clamp(1rem, 2.5vw, 1.25rem)",
-            color: "var(--text-muted)",
-            marginBottom: "1.75rem",
-            fontWeight: 300,
-          }}
-        >
-          Transforming Manual Work into{" "}
-          <strong style={{ color: "var(--text)", fontWeight: 600 }}>
-            Automated Systems
-          </strong>
-        </p>
-
-        {/* Role tags */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap" as const,
-            gap: "0.6rem",
-            justifyContent: "center",
-            marginBottom: "1.75rem",
-          }}
-        >
-          {roles.map((role) => (
-            <span
-              key={role}
-              style={{
-                padding: "0.4rem 0.9rem",
-                background: "var(--bg-card)",
-                border: "1px solid var(--border)",
-                borderRadius: "50px",
-                fontSize: "0.82rem",
-                color: "var(--text-muted)",
-                fontWeight: 500,
-                transition: "all 0.3s ease",
-                cursor: "default",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--highlight)";
-                e.currentTarget.style.color = "var(--highlight)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--text-muted)";
+                fontSize: "clamp(2.4rem, 5vw, 3.75rem)",
+                fontWeight: 800,
+                letterSpacing: "-0.035em",
+                lineHeight: 1.08,
+                color: "#F0F0F0",
+                marginBottom: "1.25rem",
               }}
             >
-              {role}
-            </span>
-          ))}
-        </div>
+              Automation &amp; AI<br />
+              Systems <span style={{ color: "#E74C3C" }}>Engineer.</span>
+            </h1>
 
-        <p
-          style={{
-            color: "var(--text-muted)",
-            marginBottom: "2.25rem",
-            fontSize: "1rem",
-            maxWidth: "520px",
-            margin: "0 auto 2.25rem",
-          }}
-        >
-          Automation-driven professional with 4+ years building reliable
-          systems — from AI-powered tools to full marketing pipelines that
-          drive measurable outcomes.
-        </p>
+            <p
+              className="reveal reveal-delay-2"
+              style={{ color: "#888", fontSize: "1.05rem", lineHeight: 1.75, marginBottom: "2.25rem", maxWidth: "480px" }}
+            >
+              Hi, I&apos;m <strong style={{ color: "#F0F0F0", fontWeight: 600 }}>John Lemuel</strong> — building workflow automations,
+              AI agents, and marketing systems that eliminate manual work and
+              drive measurable outcomes.
+            </p>
 
-        {/* Buttons */}
-        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" as const }}>
-          <a href="#automation" className="btn btn-primary">
-            View My Work
-          </a>
-          <a
-            href={WA}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-outline"
-          >
-            WhatsApp Me
-          </a>
+            {/* Role tags */}
+            <div className="reveal reveal-delay-2" style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "2.25rem" }}>
+              {["N8N & Zapier", "AI Agent Builder", "Google Ads MCP", "Marketing Ops", "Web Apps"].map((r) => (
+                <span key={r} className="tag">{r}</span>
+              ))}
+            </div>
+
+            <div className="reveal reveal-delay-3" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+              <a href="#automation" className="btn-red">View My Work</a>
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-ghost">WhatsApp Me</a>
+            </div>
+          </div>
+
+          {/* ── Headshot ── */}
+          <div className="reveal reveal-delay-2 hero-img-wrap">
+            <div style={{ position: "relative", display: "inline-block", width: "100%" }}>
+              {/* Red accent square behind */}
+              <div style={{
+                position: "absolute",
+                bottom: "-14px",
+                right: "-14px",
+                width: "100px",
+                height: "100px",
+                borderRadius: "12px",
+                background: "#E74C3C",
+                opacity: 0.85,
+                zIndex: 0,
+              }} />
+              <div style={{
+                position: "relative",
+                zIndex: 1,
+                borderRadius: "16px",
+                overflow: "hidden",
+                border: "1px solid rgba(255,255,255,0.1)",
+                background: "#141414",
+                aspectRatio: "4/5",
+              }}>
+                <img
+                  src={imgSrc("headshot.png")}
+                  alt="John Lemuel Culinares"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                    display: "block",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
+        @media (max-width: 900px) {
+          .hero-layout {
+            grid-template-columns: 1fr !important;
+            gap: 3rem !important;
+          }
+          .hero-img-wrap {
+            max-width: 300px;
+            margin: 0 auto;
+          }
         }
       `}</style>
     </section>

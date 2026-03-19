@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { imgSrc } from "../lib/imgSrc";
 
 const tools = [
@@ -35,15 +34,12 @@ export default function Tools() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".animate-scale").forEach((el, i) => {
-              setTimeout(() => el.classList.add("animated"), i * 40);
-            });
-          }
-        });
-      },
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting)
+          e.target.querySelectorAll(".reveal").forEach((el, i) =>
+            setTimeout(() => el.classList.add("visible"), i * 30)
+          );
+      }),
       { threshold: 0.05 }
     );
     if (ref.current) observer.observe(ref.current);
@@ -51,122 +47,60 @@ export default function Tools() {
   }, []);
 
   return (
-    <section
-      id="tools"
-      ref={ref}
-      style={{ padding: "6rem 0", position: "relative", zIndex: 1 }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
-        <div
-          className="animate-scale"
-          style={{ textAlign: "center", marginBottom: "4rem" }}
-        >
-          <span className="section-label">Tech Stack</span>
-          <h2
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "2.5rem",
-              fontWeight: 700,
-            }}
-          >
-            Tools I Work With
-          </h2>
-          <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", marginTop: "0.75rem" }}>
-            Software and platforms I use daily
-          </p>
+    <section id="tools" ref={ref} style={{ padding: "6rem 0" }}>
+      <div className="section-wrap">
+
+        <div className="reveal" style={{ marginBottom: "2.5rem" }}>
+          <span className="eyebrow">Tech Stack</span>
+          <h2 className="section-heading">Tools I Work With</h2>
+          <p style={{ color: "#666", fontSize: "0.9rem", marginTop: "0.4rem" }}>Software and platforms I use daily</p>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(6, 1fr)",
-            gap: "1.5rem",
-          }}
-          className="tools-grid"
-        >
-          {tools.map((tool) => (
+        <div className="tools-grid" style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "1rem" }}>
+          {tools.map((tool, i) => (
             <div
               key={tool.name}
-              className="animate-scale"
+              className={`reveal reveal-delay-${(i % 4) + 1}`}
               style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--border)",
-                borderRadius: "16px",
-                padding: "1.5rem 1rem",
+                padding: "1.25rem 0.75rem",
+                background: "#141414",
+                border: "1px solid rgba(255,255,255,0.07)",
+                borderRadius: "10px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                justifyContent: "center",
-                transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-                minHeight: "110px",
-                position: "relative",
-                overflow: "hidden",
+                gap: "0.6rem",
+                transition: "all 0.2s ease",
                 cursor: "default",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--highlight)";
-                e.currentTarget.style.transform = "translateY(-8px) scale(1.02)";
-                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0, 212, 255, 0.2)";
-                const img = e.currentTarget.querySelector("img") as HTMLElement;
-                if (img) {
-                  img.style.filter = "none";
-                  img.style.opacity = "1";
-                  img.style.transform = "scale(1.1)";
-                }
+                e.currentTarget.style.borderColor = "rgba(231,76,60,0.4)";
+                e.currentTarget.style.transform = "translateY(-3px)";
+                const img = e.currentTarget.querySelector("img") as HTMLImageElement;
+                if (img) { img.style.filter = "none"; img.style.opacity = "1"; }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "none";
-                const img = e.currentTarget.querySelector("img") as HTMLElement;
-                if (img) {
-                  img.style.filter = "brightness(0) invert(1)";
-                  img.style.opacity = "0.7";
-                  img.style.transform = "scale(1)";
-                }
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+                e.currentTarget.style.transform = "translateY(0)";
+                const img = e.currentTarget.querySelector("img") as HTMLImageElement;
+                if (img) { img.style.filter = "brightness(0) invert(1)"; img.style.opacity = "0.55"; }
               }}
             >
-              <Image
+              <img
                 src={tool.src}
                 alt={tool.name}
-                width={80}
-                height={50}
-                style={{
-                  maxWidth: "70px",
-                  maxHeight: "45px",
-                  objectFit: "contain",
-                  filter: "brightness(0) invert(1)",
-                  opacity: 0.7,
-                  transition: "all 0.4s ease",
-                }}
+                style={{ width: "36px", height: "36px", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.55, transition: "all 0.2s ease" }}
               />
-              <span
-                style={{
-                  fontSize: "0.72rem",
-                  color: "var(--text-muted)",
-                  marginTop: "0.65rem",
-                  textAlign: "center",
-                  fontWeight: 500,
-                  lineHeight: 1.3,
-                }}
-              >
-                {tool.name}
-              </span>
+              <span style={{ fontSize: "0.68rem", color: "#666", textAlign: "center", lineHeight: 1.3, fontWeight: 500 }}>{tool.name}</span>
             </div>
           ))}
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 1024px) {
-          .tools-grid { grid-template-columns: repeat(4, 1fr) !important; }
-        }
-        @media (max-width: 768px) {
-          .tools-grid { grid-template-columns: repeat(3, 1fr) !important; }
-        }
-        @media (max-width: 480px) {
-          .tools-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
+        @media (max-width: 1000px) { .tools-grid { grid-template-columns: repeat(4, 1fr) !important; } }
+        @media (max-width: 640px) { .tools-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+        @media (max-width: 400px) { .tools-grid { grid-template-columns: repeat(2, 1fr) !important; } }
       `}</style>
     </section>
   );

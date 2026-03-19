@@ -14,43 +14,38 @@ import Contact from "@/components/Contact";
 export default function Home() {
   return (
     <>
-      {/* Background layers */}
-      <div className="bg-grid" />
-      <div className="bg-glow bg-glow-1" />
-      <div className="bg-glow bg-glow-2" />
-      <div className="bg-glow bg-glow-3" />
-
       <Nav />
       <main>
         <Hero />
+        <hr className="divider" />
         <About />
+        <hr className="divider" />
         <Automation />
+        <hr className="divider" />
         <AIAgents />
+        <hr className="divider" />
         <WebApps />
+        <hr className="divider" />
         <Marketing />
-        <Tools />
-        <Certifications />
+        <hr className="divider" />
         <Results />
+        <hr className="divider" />
+        <Tools />
+        <hr className="divider" />
+        <Certifications />
+        <hr className="divider" />
         <Experience />
+        <hr className="divider" />
         <Contact />
       </main>
-
-      <footer
-        style={{
-          padding: "2rem",
-          textAlign: "center",
-          borderTop: "1px solid rgba(44, 116, 179, 0.3)",
-          color: "var(--text-muted)",
-          fontSize: "0.9rem",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <p>
-          © 2025 John Lemuel Culinares.{" "}
-          <span style={{ color: "var(--red-light)" }}>Built with Next.js.</span>{" "}
-          Passionate about automation.
-        </p>
+      <footer style={{
+        padding: "2rem",
+        textAlign: "center",
+        borderTop: "1px solid rgba(255,255,255,0.07)",
+        color: "#505050",
+        fontSize: "0.8rem",
+      }}>
+        <p>© 2025 John Lemuel Culinares — Built with Next.js</p>
       </footer>
     </>
   );

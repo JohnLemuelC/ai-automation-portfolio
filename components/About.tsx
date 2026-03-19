@@ -2,11 +2,13 @@
 
 import { useEffect, useRef } from "react";
 
+const WA = "https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project.";
+
 const stats = [
   { number: "4+", label: "Years Experience" },
   { number: "200+", label: "Assets Created" },
   { number: "62%", label: "Faster Production" },
-  { number: "70K", label: "FB Likes Grown" },
+  { number: "91%", label: "On-Time Delivery" },
 ];
 
 export default function About() {
@@ -14,15 +16,12 @@ export default function About() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".animate-on-scroll, .animate-fade-left, .animate-fade-right").forEach((el, i) => {
-              setTimeout(() => el.classList.add("animated"), i * 120);
-            });
-          }
-        });
-      },
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting)
+          e.target.querySelectorAll(".reveal").forEach((el, i) =>
+            setTimeout(() => el.classList.add("visible"), i * 100)
+          );
+      }),
       { threshold: 0.1 }
     );
     if (ref.current) observer.observe(ref.current);
@@ -30,72 +29,39 @@ export default function About() {
   }, []);
 
   return (
-    <section
-      id="about"
-      ref={ref}
-      style={{ padding: "6rem 0", position: "relative", zIndex: 1 }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
-        <div className="animate-on-scroll" style={{ textAlign: "center", marginBottom: "4rem" }}>
-          <span className="section-label">About Me</span>
-          <h2
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "2.5rem",
-              fontWeight: 700,
-              marginBottom: "1rem",
-            }}
-          >
-            Building Systems That{" "}
-            <span className="gradient-text-red">Scale</span>
-          </h2>
+    <section id="about" ref={ref} style={{ padding: "6rem 0" }}>
+      <div className="section-wrap">
+
+        <div className="reveal" style={{ marginBottom: "3rem" }}>
+          <span className="eyebrow">About Me</span>
+          <h2 className="section-heading">Building Systems That Scale</h2>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "4rem",
-            alignItems: "center",
-          }}
-          className="about-grid"
-        >
-          {/* Text */}
-          <div className="animate-fade-left">
-            <p style={{ color: "var(--text-muted)", marginBottom: "1.5rem", fontSize: "1.05rem" }}>
-              I specialize in building automation systems that eliminate
-              repetitive tasks and create operational efficiency. From multi-step
-              N8N workflows to AI-powered tools, I transform complex manual
-              processes into streamlined, reliable systems.
-            </p>
-            <p style={{ color: "var(--text-muted)", marginBottom: "1.5rem", fontSize: "1.05rem" }}>
-              Currently contributing to{" "}
-              <strong style={{ color: "var(--highlight)" }}>AdLlama</strong> — an
-              AI-powered Google Ads management platform — while also building
-              custom automation tools and AI agents for various clients.
-            </p>
-            <p style={{ color: "var(--text-muted)", fontSize: "1.05rem" }}>
-              Known for calm execution, clear communication, and delivering
-              practical solutions in fast-moving remote teams. Google certified
-              in Analytics and Ads Search.
-            </p>
+        <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "start" }}>
 
-            <div style={{ display: "flex", gap: "1rem", marginTop: "2rem", flexWrap: "wrap" as const }}>
-              <a
-                href="https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project+with+you."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-                style={{ fontSize: "0.9rem" }}
-              >
-                Work With Me
-              </a>
+          {/* Text */}
+          <div className="reveal reveal-delay-1">
+            <p style={{ color: "#888", marginBottom: "1.25rem", fontSize: "1rem", lineHeight: 1.8 }}>
+              I specialize in automation systems that eliminate repetitive tasks and create operational
+              efficiency — from multi-step N8N workflows to AI-powered tools that transform complex
+              manual processes into streamlined, reliable systems.
+            </p>
+            <p style={{ color: "#888", marginBottom: "1.25rem", fontSize: "1rem", lineHeight: 1.8 }}>
+              Currently contributing to{" "}
+              <strong style={{ color: "#F0F0F0" }}>AdLlama</strong> — an AI-powered Google Ads
+              management platform — while also building custom AI agents and automation tools for clients.
+            </p>
+            <p style={{ color: "#888", fontSize: "1rem", lineHeight: 1.8 }}>
+              Known for calm execution, clear communication, and practical solutions in fast-moving
+              remote teams. Google certified in Analytics and Ads Search.
+            </p>
+            <div style={{ display: "flex", gap: "0.75rem", marginTop: "2rem", flexWrap: "wrap" }}>
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-red">Work With Me</a>
               <a
                 href="https://linkedin.com/in/john-lemuel-culinares"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline"
-                style={{ fontSize: "0.9rem" }}
+                className="btn-ghost"
               >
                 LinkedIn →
               </a>
@@ -103,63 +69,33 @@ export default function About() {
           </div>
 
           {/* Stats */}
-          <div
-            className="animate-fade-right"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "1.5rem",
-            }}
-          >
-            {stats.map((s) => (
-              <div
-                key={s.label}
-                style={{
-                  padding: "1.75rem",
-                  background: "var(--bg-card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "16px",
-                  textAlign: "center",
-                  transition: "all 0.3s ease",
-                  cursor: "default",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--red-light)";
-                  e.currentTarget.style.transform = "translateY(-5px)";
-                  e.currentTarget.style.boxShadow = "0 15px 40px rgba(192, 57, 43, 0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
+          <div className="reveal reveal-delay-2">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              {stats.map((s) => (
                 <div
+                  key={s.label}
                   style={{
-                    fontFamily: "'Space Grotesk', sans-serif",
-                    fontSize: "2.5rem",
-                    fontWeight: 700,
-                    color: "var(--highlight)",
-                    marginBottom: "0.25rem",
+                    padding: "1.5rem",
+                    background: "#141414",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    borderRadius: "10px",
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(231,76,60,0.4)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
                 >
-                  {s.number}
+                  <div className="metric-number" style={{ color: "#E74C3C", marginBottom: "0.3rem" }}>{s.number}</div>
+                  <div style={{ color: "#666", fontSize: "0.82rem", fontWeight: 500 }}>{s.label}</div>
                 </div>
-                <div style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
         </div>
       </div>
 
       <style>{`
         @media (max-width: 768px) {
-          .about-grid {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-          }
+          .about-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
         }
       `}</style>
     </section>

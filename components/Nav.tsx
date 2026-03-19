@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { imgSrc } from "../lib/imgSrc";
 
-const WA = "https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project+with+you.";
+const WA = "https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project.";
 
 const links = [
   { href: "#about", label: "About" },
@@ -12,7 +11,6 @@ const links = [
   { href: "#ai-agents", label: "AI Agents" },
   { href: "#webapps", label: "Web Apps" },
   { href: "#marketing", label: "Marketing" },
-  { href: "#tools", label: "Tools" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -21,12 +19,12 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const go = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMenuOpen(false);
     const el = document.querySelector(href);
@@ -34,142 +32,139 @@ export default function Nav() {
   };
 
   return (
-    <nav
-      style={{
+    <>
+      <nav style={{
         position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        padding: "1rem 2rem",
-        background: scrolled ? "rgba(5, 10, 20, 0.97)" : "rgba(5, 10, 20, 0.8)",
-        backdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(44, 116, 179, 0.3)",
-        transition: "background 0.3s ease",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1400px",
+        top: 0, left: 0, right: 0,
+        zIndex: 200,
+        height: "62px",
+        display: "flex",
+        alignItems: "center",
+        padding: "0 2rem",
+        background: scrolled ? "rgba(13,13,13,0.92)" : "rgba(13,13,13,0.6)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.07)" : "1px solid transparent",
+        transition: "background 0.3s ease, border-color 0.3s ease",
+      }}>
+        <div style={{
+          maxWidth: "1100px",
+          width: "100%",
           margin: "0 auto",
           display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
-        }}
-      >
-        {/* Logo */}
-        <a href="#" onClick={(e) => handleClick(e, "body")}>
-          <Image
-            src={imgSrc("logo.png")}
-            alt="JLC"
-            width={45}
-            height={45}
-            style={{ filter: "invert(1)", transition: "transform 0.3s ease" }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-          />
-        </a>
+          justifyContent: "space-between",
+        }}>
+          {/* Logo */}
+          <a href="#" onClick={(e) => go(e, "body")} style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+            <img
+              src={imgSrc("logo.png")}
+              alt="JLC Logo"
+              style={{ width: "34px", height: "34px", objectFit: "contain" }}
+            />
+            <span style={{ fontWeight: 700, fontSize: "0.95rem", color: "#F0F0F0", letterSpacing: "-0.01em" }}>
+              John Lemuel
+            </span>
+          </a>
 
-        {/* Desktop Links */}
-        <ul
-          style={{
-            display: "flex",
-            gap: "2rem",
-            listStyle: "none",
-            alignItems: "center",
-          }}
-          className="hidden md:flex"
-        >
-          {links.map((link) => (
-            <li key={link.href}>
+          {/* Desktop links */}
+          <ul className="nav-desk" style={{ display: "flex", gap: "1.75rem", listStyle: "none", alignItems: "center" }}>
+            {links.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  onClick={(e) => go(e, l.href)}
+                  style={{ color: "#888", fontSize: "0.85rem", fontWeight: 500, transition: "color 0.2s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#F0F0F0")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#888")}
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+            <li>
               <a
-                href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
-                style={{
-                  color: "var(--text-muted)",
-                  textDecoration: "none",
-                  fontWeight: 500,
-                  fontSize: "0.85rem",
-                  letterSpacing: "0.5px",
-                  transition: "color 0.3s ease",
-                  position: "relative",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--highlight)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                href={WA}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-red"
+                style={{ padding: "0.45rem 1rem", fontSize: "0.82rem" }}
               >
-                {link.label}
+                Hire Me
               </a>
             </li>
-          ))}
-          <li>
-            <a
-              href={WA}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-              style={{ padding: "0.5rem 1.25rem", fontSize: "0.85rem" }}
-            >
-              Hire Me
-            </a>
-          </li>
-        </ul>
+          </ul>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            color: "var(--text)",
-            fontSize: "1.5rem",
-          }}
-        >
-          {menuOpen ? "✕" : "☰"}
-        </button>
-      </div>
+          {/* Mobile hamburger */}
+          <button
+            className="nav-mob"
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              display: "none",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "#F0F0F0",
+              fontSize: "1.3rem",
+              padding: "0.25rem",
+            }}
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
+        </div>
+      </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       {menuOpen && (
-        <div
-          style={{
-            background: "rgba(5, 10, 20, 0.98)",
-            borderTop: "1px solid rgba(44, 116, 179, 0.2)",
-            padding: "1rem 2rem 1.5rem",
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem",
-          }}
-        >
-          {links.map((link) => (
+        <div style={{
+          position: "fixed",
+          top: "62px", left: 0, right: 0,
+          zIndex: 199,
+          background: "rgba(13,13,13,0.97)",
+          backdropFilter: "blur(16px)",
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          padding: "1.25rem 2rem 1.75rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.25rem",
+        }}>
+          {links.map((l) => (
             <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleClick(e, link.href)}
+              key={l.href}
+              href={l.href}
+              onClick={(e) => go(e, l.href)}
               style={{
-                color: "var(--text-muted)",
-                textDecoration: "none",
-                fontWeight: 500,
+                color: "#888",
                 fontSize: "1rem",
-                padding: "0.5rem 0",
-                borderBottom: "1px solid rgba(44, 116, 179, 0.15)",
+                fontWeight: 500,
+                padding: "0.7rem 0",
+                borderBottom: "1px solid rgba(255,255,255,0.05)",
+                transition: "color 0.2s",
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#F0F0F0")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#888")}
             >
-              {link.label}
+              {l.label}
             </a>
           ))}
           <a
             href={WA}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary"
-            style={{ textAlign: "center", marginTop: "0.5rem" }}
+            className="btn-red"
+            style={{ marginTop: "1rem", textAlign: "center", justifyContent: "center" }}
           >
             Hire Me
           </a>
         </div>
       )}
-    </nav>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .nav-desk { display: none !important; }
+          .nav-mob { display: block !important; }
+        }
+      `}</style>
+    </>
   );
 }

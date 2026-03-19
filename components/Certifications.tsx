@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { imgSrc } from "../lib/imgSrc";
 
 const certs = [
-  { icon: "📊", title: "Google Analytics Certification", issued: "Issued October 2025 • Valid until 2026" },
-  { icon: "🔍", title: "Google Ads Search Certification", issued: "Issued October 2025 • Valid until 2026" },
+  { icon: "📊", title: "Google Analytics Certification", issued: "October 2025 · Valid until 2026" },
+  { icon: "🔍", title: "Google Ads Search Certification", issued: "October 2025 · Valid until 2026" },
 ];
 
 export default function Certifications() {
@@ -14,15 +13,12 @@ export default function Certifications() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll(".animate-on-scroll, .animate-fade-left, .animate-fade-right").forEach((el, i) => {
-              setTimeout(() => el.classList.add("animated"), i * 150);
-            });
-          }
-        });
-      },
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting)
+          e.target.querySelectorAll(".reveal").forEach((el, i) =>
+            setTimeout(() => el.classList.add("visible"), i * 120)
+          );
+      }),
       { threshold: 0.1 }
     );
     if (ref.current) observer.observe(ref.current);
@@ -30,101 +26,63 @@ export default function Certifications() {
   }, []);
 
   return (
-    <section
-      id="certifications"
-      ref={ref}
-      style={{ padding: "6rem 0", position: "relative", zIndex: 1 }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
-        <div className="animate-on-scroll" style={{ textAlign: "center", marginBottom: "4rem" }}>
-          <span className="section-label">Credentials</span>
-          <h2
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "2.5rem",
-              fontWeight: 700,
-            }}
-          >
-            Certifications
-          </h2>
+    <section id="certifications" ref={ref} style={{ padding: "6rem 0" }}>
+      <div className="section-wrap">
+
+        <div className="reveal" style={{ marginBottom: "2.5rem" }}>
+          <span className="eyebrow">Credentials</span>
+          <h2 className="section-heading">Certifications</h2>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "3rem",
-            flexWrap: "wrap" as const,
-          }}
-        >
-          <div className="animate-fade-left">
-            <Image
+        <div className="certs-layout" style={{ display: "flex", gap: "3.5rem", alignItems: "center", flexWrap: "wrap" }}>
+          <div className="reveal reveal-delay-1" style={{ flex: "0 0 auto" }}>
+            <img
               src={imgSrc("certifications.png")}
               alt="Google Certifications"
-              width={380}
-              height={260}
               style={{
-                maxWidth: "380px",
-                width: "100%",
-                borderRadius: "16px",
-                border: "1px solid var(--border)",
-                boxShadow: "0 10px 40px rgba(0, 0, 0, 0.3)",
+                width: "360px",
+                maxWidth: "100%",
+                borderRadius: "12px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                display: "block",
               }}
             />
           </div>
 
-          <div
-            className="animate-fade-right"
-            style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
-          >
-            {certs.map((cert) => (
+          <div className="reveal reveal-delay-2" style={{ flex: 1, display: "flex", flexDirection: "column", gap: "1rem", minWidth: "280px" }}>
+            {certs.map((c) => (
               <div
-                key={cert.title}
+                key={c.title}
                 style={{
                   display: "flex",
                   alignItems: "center",
                   gap: "1rem",
-                  padding: "1rem 1.5rem",
-                  background: "var(--bg-card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "12px",
-                  transition: "all 0.3s ease",
-                  cursor: "default",
-                  minWidth: "320px",
+                  padding: "1.1rem 1.25rem",
+                  background: "#141414",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                  borderRadius: "10px",
+                  transition: "border-color 0.2s ease",
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--accent-light)";
-                  e.currentTarget.style.transform = "translateX(5px)";
-                  e.currentTarget.style.boxShadow = "0 10px 30px rgba(44, 116, 179, 0.2)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.transform = "translateX(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(231,76,60,0.35)")}
+                onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)")}
               >
-                <span style={{ fontSize: "2rem" }}>{cert.icon}</span>
+                <span style={{ fontSize: "1.75rem", flexShrink: 0 }}>{c.icon}</span>
                 <div>
-                  <h4
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: "1rem",
-                      fontWeight: 600,
-                      marginBottom: "0.2rem",
-                    }}
-                  >
-                    {cert.title}
-                  </h4>
-                  <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
-                    {cert.issued}
-                  </p>
+                  <h4 style={{ fontWeight: 600, fontSize: "0.95rem", marginBottom: "0.2rem" }}>{c.title}</h4>
+                  <p style={{ fontSize: "0.8rem", color: "#666" }}>{c.issued}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 700px) {
+          .certs-layout { flex-direction: column !important; }
+          .certs-layout img { width: 100% !important; }
+        }
+      `}</style>
     </section>
   );
 }
