@@ -82,7 +82,9 @@ export default function About() {
 
             <div style={{ display: "flex", gap: "1rem", marginTop: "2rem", flexWrap: "wrap" as const }}>
               <a
-                href="mailto:j.culinares06@gmail.com"
+                href="https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project+with+you."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-primary"
                 style={{ fontSize: "0.9rem" }}
               >

@@ -2,17 +2,20 @@
 
 import { useEffect, useRef } from "react";
 
+const WA = "https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project+with+you.";
+
 const contactLinks = [
+  {
+    href: WA,
+    icon: "💬",
+    label: "WhatsApp Me",
+    target: "_blank",
+    accent: "red",
+  },
   {
     href: "mailto:j.culinares06@gmail.com",
     icon: "✉️",
     label: "j.culinares06@gmail.com",
-    accent: "red",
-  },
-  {
-    href: "tel:+639761172117",
-    icon: "📱",
-    label: "+63 976 117 2117",
     accent: "cyan",
   },
   {
@@ -23,10 +26,9 @@ const contactLinks = [
     accent: "cyan",
   },
   {
-    href: "https://johnlemuelc.github.io/Portfolio/",
-    icon: "🌐",
-    label: "Old Portfolio",
-    target: "_blank",
+    href: "tel:+639761172117",
+    icon: "📱",
+    label: "+63 976 117 2117",
     accent: "cyan",
   },
 ];
@@ -136,7 +138,9 @@ export default function Contact() {
         {/* CTA */}
         <div className="animate-on-scroll" style={{ textAlign: "center", marginTop: "4rem" }}>
           <a
-            href="mailto:j.culinares06@gmail.com"
+            href={WA}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-primary"
             style={{ fontSize: "1rem", padding: "1rem 2.5rem" }}
           >

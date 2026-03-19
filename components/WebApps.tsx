@@ -2,38 +2,39 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { imgSrc } from "../lib/imgSrc";
 
 const webapps = [
   {
-    image: "/images/blog-app.png",
+    image: imgSrc("blog-app.png"),
     title: "Blog Automation Web App",
     description:
       "User-friendly interface for generating SEO-optimized blog content. Step-by-step workflow from client setup to topic generation and final blog writing.",
     tags: ["Web App", "AI Content", "SEO", "N8N"],
   },
   {
-    image: "/images/canva-listing.png",
+    image: imgSrc("canva-listing.png"),
     title: "Canva Listing Automation",
     description:
       "Real estate marketing tool that generates branded graphics from property data. Supports single listings and batch CSV uploads via Canva API.",
     tags: ["Web App", "Canva API", "Real Estate", "Automation"],
   },
   {
-    image: "/images/video-merger.png",
+    image: imgSrc("video-merger.png"),
     title: "Video AI Merger Automation",
     description:
       "6-step video production pipeline combining property tours with AI voiceovers. Automates script generation, voice synthesis, and final rendering.",
     tags: ["Web App", "AI Voice", "Video", "Pipeline"],
   },
   {
-    image: "/images/webdesign-sdi.png",
+    image: imgSrc("webdesign-sdi.png"),
     title: "Synergy Data Investments Site",
     description:
       "Investment company website with property portfolios, investor tools, market insights, and downloadable guides.",
     tags: ["WordPress", "Web Design", "Investment"],
   },
   {
-    image: "/images/webdesign-synergy.png",
+    image: imgSrc("webdesign-synergy.png"),
     title: "Synergy Estates Website",
     description:
       "Property investment platform with UK News section, property rankings, guides library, and project showcases.",

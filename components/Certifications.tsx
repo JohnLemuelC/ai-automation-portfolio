@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { imgSrc } from "../lib/imgSrc";
 
 const certs = [
   { icon: "📊", title: "Google Analytics Certification", issued: "Issued October 2025 • Valid until 2026" },
@@ -59,7 +60,7 @@ export default function Certifications() {
         >
           <div className="animate-fade-left">
             <Image
-              src="/images/certifications.png"
+              src={imgSrc("certifications.png")}
               alt="Google Certifications"
               width={380}
               height={260}

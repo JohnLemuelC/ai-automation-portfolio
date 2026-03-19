@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { imgSrc } from "../lib/imgSrc";
+
+const WA = "https://wa.me/+639761172117?text=Hi+John%21+I+saw+your+portfolio+and+I%27d+like+to+discuss+a+project+with+you.";
 
 const links = [
   { href: "#about", label: "About" },
@@ -57,7 +60,7 @@ export default function Nav() {
         {/* Logo */}
         <a href="#" onClick={(e) => handleClick(e, "body")}>
           <Image
-            src="/images/logo.png"
+            src={imgSrc("logo.png")}
             alt="JLC"
             width={45}
             height={45}
@@ -100,7 +103,9 @@ export default function Nav() {
           ))}
           <li>
             <a
-              href="mailto:j.culinares06@gmail.com"
+              href={WA}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-primary"
               style={{ padding: "0.5rem 1.25rem", fontSize: "0.85rem" }}
             >
@@ -155,7 +160,9 @@ export default function Nav() {
             </a>
           ))}
           <a
-            href="mailto:j.culinares06@gmail.com"
+            href={WA}
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-primary"
             style={{ textAlign: "center", marginTop: "0.5rem" }}
           >

@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { imgSrc } from "../lib/imgSrc";
 
 const agents = [
   {
-    image: "/images/Google Ads MCP Server.png",
+    image: imgSrc("Google Ads MCP Server.png"),
     title: "Google Ads MCP Server",
     description:
       "A Model Context Protocol server enabling AI assistants (Claude, ChatGPT) to natively query and manage Google Ads accounts — campaigns, keywords, search terms, and performance data — through natural language.",
@@ -15,7 +16,7 @@ const agents = [
     accent: "cyan",
   },
   {
-    image: "/images/Claude Code.png",
+    image: imgSrc("Claude Code.png"),
     title: "AdLlama — AI Google Ads Platform",
     description:
       "Contributing to AdLlama, a Next.js + Python platform that lets marketers manage Google Ads campaigns through a Claude-powered chat interface. Built the Keyword Planner API integration and Ad Copy Validation layer.",
@@ -25,7 +26,7 @@ const agents = [
     accent: "red",
   },
   {
-    image: "/images/Retell-AI-Logo.png",
+    image: imgSrc("Retell-AI-Logo.png"),
     title: "Slack Ad Script Reviewer",
     description:
       "A Slack bot that automatically reviews ad scripts submitted by team members — checking for compliance, tone, call-to-action strength, and brand voice consistency using AI analysis.",
@@ -35,7 +36,7 @@ const agents = [
     accent: "orange",
   },
   {
-    image: "/images/Google Ads MCP Server.png",
+    image: imgSrc("Google Ads MCP Server.png"),
     title: "Google Ads Agent (Chat)",
     description:
       "Conversational AI agent that connects to live Google Ads data — fetches campaign performance, suggests optimizations, generates keyword ideas, and surfaces anomalies through natural dialogue.",
@@ -45,7 +46,7 @@ const agents = [
     accent: "cyan",
   },
   {
-    image: "/images/Gemini_Generated_Image_330ieb330ieb330i.png",
+    image: imgSrc("Gemini_Generated_Image_330ieb330ieb330i.png"),
     title: "Ad Writing GPT",
     description:
       "Custom GPT trained on high-performing ad copy patterns. Generates platform-specific ads (Google, Meta, LinkedIn) with character count enforcement, CTA optimization, and brand voice matching.",
@@ -55,7 +56,7 @@ const agents = [
     accent: "cyan",
   },
   {
-    image: "/images/Gemini_Generated_Image_dcpnjzdcpnjzdcpn.png",
+    image: imgSrc("Gemini_Generated_Image_dcpnjzdcpnjzdcpn.png"),
     title: "Basecamp AI Agent",
     description:
       "Zapier-powered AI agent that monitors Basecamp project activity, summarizes discussion threads via ChatGPT, and posts daily briefings to Slack — keeping remote teams aligned without manual reviews.",

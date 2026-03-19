@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { imgSrc } from "../lib/imgSrc";
 
 const campaigns = [
   {
-    image: "/images/marketing-sdi.png",
+    image: imgSrc("marketing-sdi.png"),
     title: "Synergy Data Investments",
     description:
       "Created 200+ investor-facing assets including research reports, social content, property portfolios, and newsletters.",
@@ -16,7 +17,7 @@ const campaigns = [
     ],
   },
   {
-    image: "/images/marketing-synergy-estates.png",
+    image: imgSrc("marketing-synergy-estates.png"),
     title: "Synergy Estates",
     description:
       "Property marketing content including brand documents, valuation tools, and portfolio showcases for UK market.",
@@ -26,7 +27,7 @@ const campaigns = [
     ],
   },
   {
-    image: "/images/marketing-metalkin.png",
+    image: imgSrc("marketing-metalkin.png"),
     title: "Metalkin Australia (Liquoroo)",
     description:
       "Vibrant social media content for alcohol delivery app — promotional posts, memes, and app marketing campaigns.",
@@ -37,7 +38,7 @@ const campaigns = [
     ],
   },
   {
-    image: "/images/marketing-yfarmers.png",
+    image: imgSrc("marketing-yfarmers.png"),
     title: "Aljay Agro-Industrial (YFarmers)",
     description:
       "Nationwide agricultural campaign including YFarmers Convention, social campaigns, and road tours.",

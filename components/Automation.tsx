@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { imgSrc } from "../lib/imgSrc";
 
 const n8nProjects = [
   {
-    image: "/images/n8n-workflows.png",
+    image: imgSrc("n8n-workflows.png"),
     title: "N8N Blog Automation System",
     description:
       "A comprehensive 5-workflow system automating the entire blog creation pipeline — keyword research to WordPress publishing. Includes AI-powered topic generation, outline creation, draft writing, human review queue, and auto-publishing.",
@@ -13,14 +14,14 @@ const n8nProjects = [
     featured: true,
   },
   {
-    image: "/images/n8n-video.png",
+    image: imgSrc("n8n-video.png"),
     title: "Video Production Workflow",
     description:
       "N8N backend workflow powering video automation — file processing, AI audio generation, and status tracking.",
     tags: ["N8N", "AI Audio", "Render API"],
   },
   {
-    image: "/images/apps-script.png",
+    image: imgSrc("apps-script.png"),
     title: "KPI Data Manager",
     description:
       "Google Apps Script system aggregating KPIs from LinkedIn, Meta, Bing, and StackAdapt into a single Sheets dashboard with Discord notifications.",
@@ -30,37 +31,37 @@ const n8nProjects = [
 
 const zapierWorkflows = [
   {
-    image: "/images/zapier-facebook-sheets-email.png",
+    image: imgSrc("zapier-facebook-sheets-email.png"),
     title: "Facebook Lead Capture Pipeline",
     description: "Captures Facebook Lead Ads, logs to Google Sheets, sends email notifications.",
     apps: ["Facebook Lead Ads", "Google Sheets", "Email"],
   },
   {
-    image: "/images/zapier-linkedin-hubspot.png",
+    image: imgSrc("zapier-linkedin-hubspot.png"),
     title: "LinkedIn Ads → HubSpot CRM",
     description: "Routes LinkedIn leads through email notification, creates HubSpot engagement records.",
     apps: ["LinkedIn Ads", "Email", "HubSpot"],
   },
   {
-    image: "/images/zapier-basecamp-chatgpt-slack.png",
+    image: imgSrc("zapier-basecamp-chatgpt-slack.png"),
     title: "AI Comment Summarizer",
     description: "ChatGPT processes Basecamp comments and sends summaries to Slack.",
     apps: ["Basecamp", "ChatGPT", "Slack"],
   },
   {
-    image: "/images/zapier-leadconnector-zoom.png",
+    image: imgSrc("zapier-leadconnector-zoom.png"),
     title: "Pipeline → Webinar Registration",
     description: "Auto-registers contacts for Zoom webinars on pipeline stage change.",
     apps: ["LeadConnector", "Zoom"],
   },
   {
-    image: "/images/zapier-gumroad-leadconnector.png",
+    image: imgSrc("zapier-gumroad-leadconnector.png"),
     title: "Purchase → CRM Contact Sync",
     description: "Syncs Gumroad purchases to LeadConnector, creates contact records.",
     apps: ["Gumroad", "LeadConnector"],
   },
   {
-    image: "/images/zapier-linkedin-email.png",
+    image: imgSrc("zapier-linkedin-email.png"),
     title: "LinkedIn Lead Alert",
     description: "Instant email notification for new LinkedIn Lead Gen Form responses.",
     apps: ["LinkedIn Ads", "Email"],
